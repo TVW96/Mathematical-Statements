@@ -4,29 +4,63 @@ import java.util.Scanner;
 
 public class Main {
 
+
     public static void main(String[] args) {
 
         boolean[] inputs = userInput();
         boolean a = inputs[0];
         boolean b = inputs[1];
 
-        // Display resaults of logical operations
+        // Display results of logical operations
+        System.out.println("-----------RESULTS LIST FOR ALL LOGICAL OPERATORS-----------");
         System.out.println("A AND B: " + LogicalOperations.conjunction(a, b));
         System.out.println("A OR B: " + LogicalOperations.disjunction(a, b));
         System.out.println("NOT A: " + LogicalOperations.negation(a));
         System.out.println("NOT B: " + LogicalOperations.negation(b));
         System.out.println("A → B (Implication): " + LogicalOperations.implication(a, b));
         System.out.println("A ↔ B (Biconditional): " + LogicalOperations.biconditional(a, b));
+
+        Main main = new Main();
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("-----------------------------TRUTH TABLE----------------------------------");
+        System.out.println("(all possible outcomes)");
+        ArrayList<String> truthTable = main.generateTruthTable(null);  // Assuming `userInput` isn't needed for this example
+        for (String row : truthTable) {
+            System.out.println(row);
+        }
     }
 
-    public ArrayList<String> generateTruthTable(String [] userInput) {
+    public ArrayList<String> generateTruthTable(String[] userInput) {
         ArrayList<String> result = new ArrayList<>();
-        // Implement the logic to generate the truth table here.
 
-        
+        // Define the possible boolean values for A and B
+        boolean[] values = {true, false};
+
+        // Add a header for the truth table with fixed-width columns
+        result.add(String.format("%-6s %-6s %-10s %-10s %-10s %-10s %-10s %-10s",
+                "A", "B", "A AND B", "A OR B", "NOT A", "NOT B", "A → B", "A ↔ B"));
+
+        // Loop through all possible values of A and B
+        for (boolean a : values) {
+            for (boolean b : values) {
+                // Calculate each logical operation for the current values of A and B
+                boolean andResult = LogicalOperations.conjunction(a, b);
+                boolean orResult = LogicalOperations.disjunction(a, b);
+                boolean notA = LogicalOperations.negation(a);
+                boolean notB = LogicalOperations.negation(b);
+                boolean implicationResult = LogicalOperations.implication(a, b);
+                boolean biconditionalResult = LogicalOperations.biconditional(a, b);
+
+                // Format each row with fixed-width columns and add it to the result list
+                result.add(String.format("%-6s %-6s %-10s %-10s %-10s %-10s %-10s %-10s",
+                        a, b, andResult, orResult, notA, notB, implicationResult, biconditionalResult));
+            }
+        }
 
         return result;
     }
+
+
     // User input function
     public static boolean[] userInput() {
         Scanner scanner = new Scanner(System.in);
@@ -35,10 +69,10 @@ public class Main {
 
         // Evaluate option A
         System.out.println("Input A: ");
-        String inputA = scanner.next();
+        String inputA = scanner.next().toLowerCase();
         while (!validOptions[0].equals(inputA) && !validOptions[1].equals(inputA)) {
             for(String option: validOptions) {
-                if(inputA.toLowerCase().equals(option)) {
+                if(inputA.equals(option)) {
                     break;
                 }
             }
@@ -51,7 +85,7 @@ public class Main {
 
         // Evaluate option B
         System.out.println("Input B: ");
-        String inputB = scanner.next();
+        String inputB = scanner.next().toLowerCase();
         while (!validOptions[0].equals(inputB) && !validOptions[1].equals(inputB)) {
             for(String option: validOptions) {
                 if (inputB.toLowerCase().equals(option)) {
