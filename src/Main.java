@@ -1,9 +1,8 @@
+
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-
 
     public static void main(String[] args) {
 
@@ -60,34 +59,37 @@ public class Main {
         return result;
     }
 
-
     // User input function
     public static boolean[] userInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type in your desired truth AND OR false inputs to have a Truth Table created: ");
-        String [] validOptions = {"true", "false", "1", "0"};
+        System.out.println("Valid inputs: true, false, 1, 0");
+        String[] validOptions = {"true", "false", "1", "0"};
 
         // Evaluate option A
         System.out.println("Input A: ");
         String inputA = scanner.next().toLowerCase();
         while (!validOptions[0].equals(inputA) && !validOptions[1].equals(inputA)) {
-            for(String option: validOptions) {
-                if(inputA.equals(option)) {
+            for (String option : validOptions) {
+                if (inputA.equals(option)) {
                     break;
                 }
             }
             System.out.println("INVALID INPUT. TRY AGAIN.");
             System.out.println("Input A: ");
             inputA = scanner.next();
-            if(inputA.equals("1")){ inputA = "true"; }
-            else if(inputA.equals("0")){ inputA = "false"; }
+            if (inputA.equals("1")) {
+                inputA = "true";
+            } else if (inputA.equals("0")) {
+                inputA = "false";
+            }
         }
 
         // Evaluate option B
         System.out.println("Input B: ");
         String inputB = scanner.next().toLowerCase();
         while (!validOptions[0].equals(inputB) && !validOptions[1].equals(inputB)) {
-            for(String option: validOptions) {
+            for (String option : validOptions) {
                 if (inputB.toLowerCase().equals(option)) {
                     break;
                 }
@@ -95,8 +97,11 @@ public class Main {
             System.out.println("INVALID INPUT. TRY AGAIN.");
             System.out.println("Input B: ");
             inputB = scanner.next();
-            if(inputB.equals("1")){ inputB = "true"; }
-            else if(inputB.equals("0")){ inputB = "false"; }
+            if (inputB.equals("1")) {
+                inputB = "true";
+            } else if (inputB.equals("0")) {
+                inputB = "false";
+            }
         }
 
         boolean A = false;
